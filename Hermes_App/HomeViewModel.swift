@@ -8,7 +8,7 @@ import SwiftUI
 import Combine
 
 final class HomeViewModel: ObservableObject {
-    
+
 }
 
 struct Fecha: Hashable {

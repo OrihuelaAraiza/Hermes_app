@@ -23,10 +23,10 @@ struct ContentView: View {
                 .scaledToFit()
                 .frame(maxWidth: .infinity)
 
-          
+
             VStack(alignment: .leading, spacing: 15) {
 
-             
+
                 HStack {
                     Button("Iniciar sesión") {
                         esLogin = true
