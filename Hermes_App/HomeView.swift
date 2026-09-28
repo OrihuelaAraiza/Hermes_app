@@ -13,7 +13,7 @@ struct HomeView: View {
 
     var body: some View {
         ZStack {
-            Color(.blancouwu)
+            Color(.backgroundPrimary)
             NavigationView {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
@@ -34,7 +34,7 @@ struct HomeView: View {
 
                         Text("Your today´s tasks")
                             .font(.system(size: 25, weight: .bold, design: .default))
-                            .foregroundColor(.cafeuwu)
+                            .foregroundColor(.elements)
 
                         ForEach(Recordatorios.Recordatorio/*,id: \.id*/) {
                             recordatorio in Filita(recordatorio: recordatorio)

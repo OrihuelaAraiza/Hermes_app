@@ -33,8 +33,8 @@ struct ContentView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(10)
-                    .background(esLogin ? Color.papuGris : Color.papuGrisClaro)
-                    .foregroundColor(esLogin ? .white : Color.papuGris)
+                    .background(esLogin ? Color.buttonSelected : Color.fieldBackground)
+                    .foregroundColor(esLogin ? .white : Color.buttonSelected)
                     .cornerRadius(20)
 
                     Button("Registrarse") {
@@ -42,38 +42,38 @@ struct ContentView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(10)
-                    .background(esLogin ? Color.papuGrisClaro : Color.papuGris)
-                    .foregroundColor(esLogin ? Color.papuGris : .white)
+                    .background(esLogin ? Color.fieldBackground : Color.buttonSelected)
+                    .foregroundColor(esLogin ? Color.buttonSelected : .white)
                     .cornerRadius(20)
                 }
 
                 if esLogin == false {
                     Text("Nombre")
-                        .foregroundColor(Color.papuCafe)
+                        .foregroundColor(Color.typography)
                     TextField("Nombre", text: $nombre)
                         .padding()
-                        .background(Color.papuGrisClaro)
+                        .background(Color.fieldBackground)
                         .cornerRadius(15)
                 }
 
                 Text("Correo electrónico")
-                    .foregroundColor(Color.papuCafe)
+                    .foregroundColor(Color.typography)
                 TextField("Correo electrónico", text: $correo)
                     .padding()
-                    .background(Color.papuGrisClaro)
+                    .background(Color.fieldBackground)
                     .cornerRadius(15)
 
                 Text("Contraseña")
-                    .foregroundColor(Color.papuCafe)
+                    .foregroundColor(Color.typography)
                 SecureField("Contraseña", text: $contrasena)
                     .padding()
-                    .background(Color.papuGrisClaro)
+                    .background(Color.fieldBackground)
                     .cornerRadius(15)
 
                 if esLogin {
                     Text("¿Olvidaste tu contraseña?")
                         .font(.caption)
-                        .foregroundColor(Color.papuGris)
+                        .foregroundColor(Color.buttonSelected)
                 }
 
                 Spacer()
@@ -84,8 +84,8 @@ struct ContentView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(Color.papuBoton)
-                .foregroundColor(Color.papuGrisTexto)
+                .background(Color.buttonDisabled)
+                .foregroundColor(Color.textDisabled)
                 .cornerRadius(15)
             }
             .padding(20)

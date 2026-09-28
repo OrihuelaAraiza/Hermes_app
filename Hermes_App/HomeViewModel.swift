@@ -41,11 +41,11 @@ struct Casilla: View {
         VStack {
             Text(dia.nombre.prefix(3))
             .font(.system(size: 15, weight: .semibold, design: .default))
-            .foregroundColor(seleccionado ? .negrouwu : .grisoscurouwu)
+            .foregroundColor(seleccionado ? .neutralBlack : .grayDark)
             .padding(.top, 10)
         }
         .frame(width: 40, height: 55, alignment: .top)
-        .background(seleccionado ? Color.grisoscurouwu : Color.grisclarouwu)
+        .background(seleccionado ? Color.grayDark : Color.buttonUnselected)
         .cornerRadius(10)
     }
 }
@@ -56,7 +56,7 @@ struct Encabezado: View {
         VStack (spacing: 15) {
             Text("\(fecha.mes.prefix(3)). \(fecha.dia) —\(fecha.año)")
                 .font(.system(size: 25, weight: .bold, design: .default))
-                .foregroundColor(.negrouwu)
+                .foregroundColor(.neutralBlack)
                 .padding(.top)
         }
     }
@@ -76,30 +76,30 @@ struct Cuerpo: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text("Hi, \(nombre)!")
                     .font(.system(size: 25, weight: .bold, design: .default))
-                    .foregroundColor(.negrouwu)
+                    .foregroundColor(.neutralBlack)
                 Text("\(frase)!")
                     .font(.system(size: 15, weight: .regular, design: .default))
-                    .foregroundColor(.negrouwu)
+                    .foregroundColor(.neutralBlack)
             }
             Spacer()
             ZStack {
                 Image(systemName: "circle.fill" )
                     .symbolRenderingMode(.monochrome)
                     .resizable()
-                    .foregroundStyle(.grisoscurouwu)
+                    .foregroundStyle(.grayDark)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 75,
                            height: 75)
                 Image(systemName: "circle" )
                     .symbolRenderingMode(.monochrome)
                     .resizable()
-                    .foregroundStyle(.grisoscurouwu)
+                    .foregroundStyle(.grayDark)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 100,
                            height: 100)
                 Text("\(progreso)%")
                     .font(.system(size: 25, weight: .regular, design: .default))
-                    .foregroundColor(.blancouwu)
+                    .foregroundColor(.backgroundPrimary)
             }
         }
     }
@@ -147,34 +147,34 @@ struct Filita: View {
             Image(systemName: recordatorio.lista)
                 .symbolRenderingMode(.monochrome)
                 .resizable()
-                .foregroundColor(.cafeuwu)
+                .foregroundColor(.elements)
                 .aspectRatio(contentMode: .fit)
                 .padding(8)
                 .frame(width: 60,
                        height: 60)
-                .background(.blancouwu)
+                .background(.backgroundPrimary)
                 .cornerRadius(10)
             VStack(alignment: .leading, spacing: 6) {
                 Text(recordatorio.nombre)
                     .font(.system(size: 20, weight: .bold, design: .default))
-                    .foregroundColor(.negrouwu)
+                    .foregroundColor(.neutralBlack)
                 Text("\(recordatorio.fecha.dia), \(recordatorio.fecha.mes)")
                     .font(.system(size: 14, weight: .regular, design: .default))
-                    .foregroundColor(.negrouwu)
+                    .foregroundColor(.neutralBlack)
                     .padding(8)
-                    .background(.amarillouwu)
+                    .background(.near)
                     .cornerRadius(10)
             }
             Spacer()
             Button {
                 completado.toggle()
             }label: {
-                Boton(color: completado ? .cafeuwu : .grisoscurouwu,
+                Boton(color: completado ? .elements : .grayDark,
                       imagen: completado ? "circle.fill" : "circle.dashed")
             }
         }
         .padding()
-        .background(.grisclarouwu)
+        .background(.buttonUnselected)
         .cornerRadius(20)
     }
 }

@@ -13,7 +13,7 @@ struct SplashView: View {
     var body: some View {
         ZStack
         {
-            Color("blancouwu")
+            Color("BackgroundPrimary")
                 .ignoresSafeArea()
             VStack(spacing: -90) {
                 ZStack {
@@ -37,7 +37,7 @@ struct SplashView: View {
                 }
                 Text("wish do!")
                     .font(.largeTitle.bold())
-                    .foregroundStyle(.cafeuwu)
+                    .foregroundStyle(.elements)
                     .padding(.bottom, 100)
             }
         }
