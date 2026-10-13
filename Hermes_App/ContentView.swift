@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    let onContinue: () -> Void
 
     @State var nombre = ""
     @State var correo = ""
@@ -80,21 +81,22 @@ struct ContentView: View {
 
 
                 Button("Continuar") {
-                    print("Continuar")
+                    onContinue()
                 }
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(Color.buttonDisabled)
-                .foregroundColor(Color.textDisabled)
+                .background(Color.buttonSelected)
+                .foregroundColor(.white)
                 .cornerRadius(15)
             }
             .padding(20)
         }
+        .background(Color.backgroundPrimary.ignoresSafeArea())
         .ignoresSafeArea(edges: .top)
         .ignoresSafeArea(.keyboard)
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(onContinue: {})
 }

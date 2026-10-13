@@ -9,6 +9,7 @@ import SwiftUI
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
     @State var progreso = 0
+    let tareas = Recordatorios.Recordatorio.count
     let fecha = Fecha(dia: 20, mes: "Septiembre", año: 2026)
 
     var body: some View {
@@ -28,7 +29,7 @@ struct HomeView: View {
 
                         Cuerpo(nombre: "Yoss",
                                frase: "Recuerda: Los pollitos dicen pío, pío, pío",
-                               progreso: $progreso)
+                               porcentaje: tareas == 0 ? 0 : progreso * 100 / tareas)
 
                         Divider()
 
@@ -37,10 +38,12 @@ struct HomeView: View {
                             .foregroundColor(.elements)
 
                         ForEach(Recordatorios.Recordatorio/*,id: \.id*/) {
-                            recordatorio in Filita(recordatorio: recordatorio)
+                            recordatorio in Filita(recordatorio: recordatorio,
+                                                   progreso: $progreso)
                         }
                     }
                     .padding()
+                    .background(.backgroundPrimary)
                 }
             }
         }

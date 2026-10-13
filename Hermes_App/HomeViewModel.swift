@@ -65,7 +65,7 @@ struct Encabezado: View {
 struct Cuerpo: View {
     var nombre: String
     var frase: String
-    @Binding var progreso: Int
+    var porcentaje: Int
     var body: some View {
         HStack (spacing: 10) {
             Image("magouwu")
@@ -86,18 +86,19 @@ struct Cuerpo: View {
                 Image(systemName: "circle.fill" )
                     .symbolRenderingMode(.monochrome)
                     .resizable()
-                    .foregroundStyle(.grayDark)
+                    .foregroundStyle(porcentaje == 100 ? .neutralBlack : .grayDark)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 75,
                            height: 75)
                 Image(systemName: "circle" )
                     .symbolRenderingMode(.monochrome)
                     .resizable()
-                    .foregroundStyle(.grayDark)
+                    .foregroundStyle(porcentaje == 100 ? .neutralBlack : .grayDark)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 100,
                            height: 100)
-                Text("\(progreso)%")
+                    .opacity(Double(porcentaje) / 100)
+                Text("\(porcentaje)%")
                     .font(.system(size: 25, weight: .regular, design: .default))
                     .foregroundColor(.backgroundPrimary)
             }
@@ -142,39 +143,62 @@ struct Boton: View {
 struct Filita: View {
     let recordatorio: Pendiente
     @State var completado = false
+    @State private var visible = true
+    @Binding var progreso: Int
+
     var body: some View {
-        HStack(spacing: 15) {
-            Image(systemName: recordatorio.lista)
-                .symbolRenderingMode(.monochrome)
-                .resizable()
-                .foregroundColor(.elements)
-                .aspectRatio(contentMode: .fit)
-                .padding(8)
-                .frame(width: 60,
-                       height: 60)
-                .background(.backgroundPrimary)
-                .cornerRadius(10)
-            VStack(alignment: .leading, spacing: 6) {
-                Text(recordatorio.nombre)
-                    .font(.system(size: 20, weight: .bold, design: .default))
-                    .foregroundColor(.neutralBlack)
-                Text("\(recordatorio.fecha.dia), \(recordatorio.fecha.mes)")
-                    .font(.system(size: 14, weight: .regular, design: .default))
-                    .foregroundColor(.neutralBlack)
+        if visible {
+            HStack(spacing: 15) {
+                Image(systemName: recordatorio.lista)
+                    .symbolRenderingMode(.monochrome)
+                    .resizable()
+                    .foregroundColor(.elements)
+                    .aspectRatio(contentMode: .fit)
                     .padding(8)
-                    .background(.near)
+                    .frame(width: 60,
+                           height: 60)
+                    .background(.backgroundPrimary)
                     .cornerRadius(10)
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(recordatorio.nombre)
+                        .font(.system(size: 20, weight: .bold, design: .default))
+                        .foregroundColor(.neutralBlack)
+                    Text("\(recordatorio.fecha.dia), \(recordatorio.fecha.mes)")
+                        .font(.system(size: 14, weight: .regular, design: .default))
+                        .foregroundColor(.neutralBlack)
+                        .padding(8)
+                        .background(.near)
+                        .cornerRadius(10)
+                }
+                Spacer()
+                Button {
+                    completado.toggle()
+                }label: {
+                    Boton(color: completado ? .elements : .grayDark,
+                          imagen: completado ? "circle.fill" : "circle.dashed")
+                }
             }
-            Spacer()
-            Button {
-                completado.toggle()
-            }label: {
-                Boton(color: completado ? .elements : .grayDark,
-                      imagen: completado ? "circle.fill" : "circle.dashed")
+            .padding()
+            .background(.buttonUnselected)
+            .cornerRadius(20)
+            .transition(.move(edge: .trailing).combined(with: .opacity))
+            .task(id: completado) {
+                guard completado else { return }
+
+                do {
+                    try await Task.sleep(for: .seconds(2))
+                    try Task.checkCancellation()
+                } catch {
+                    return
+                }
+
+                guard completado, visible else { return }
+
+                withAnimation(.easeOut(duration: 0.5)) {
+                    visible = false
+                    progreso += 1
+                }
             }
         }
-        .padding()
-        .background(.buttonUnselected)
-        .cornerRadius(20)
     }
 }
